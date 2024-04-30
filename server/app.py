@@ -8,31 +8,17 @@ app.secret_key = b'?w\x85Z\x08Q\xbdO\xb8\xa9\xb65Kj\xa9_'
 
 @app.route('/sessions/<string:key>', methods=['GET'])
 def show_session(key):
-    session["Hello"]=session.get("Hello") or "World"
-    session["good night"] or "bye"
+    session["hello"]=session.get(" Hello") or "world"
+    session["goodnight"]=session.get("goodnight") or "moon"
     response=make_response(jsonify({
         "session":{
             "session_key":key,
             "session_value":session[key],
             "session_accessed":session.accessed
         },
-        "cookies":[{cookie:request.cookies[cookie]}
-                   for cookie in request.cookies]
+        "cookies":[{cookie:request.cookies[cookie]} for cookie in request.cookies]
     }))
-    response.set_cookie("mouse","cookie")
-    # session["hello"]=session.get("Hello") or "World"
-    # session["Goodnight"]=session.get("goodnight") or "Moon"
-    # response=make_response(jsonify({
-    #     "session":{
-    #         "session_key":key,
-    #         "session_value":session[key],
-    #         "session_accessed":session.accessed,
-    #     },
-    #     "cookies":[{cookie:request.cookies[cookie]
-    #                 for cookie in request.cookies}]
-    # }),200)
-    # response.set_cookie("mouse","cookie")
-    # return response
+    return response
 
 if __name__ == '__main__':
     app.run(port=5555)
